@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Custom di Deka Tutorial</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>
+    <script src="https://dekatutorial.github.io/crd/s.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://dekatutorial.github.io/crd/s.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body class="bg-gray-100"> 
+    
+    <script>dt()</script>
+    
+    <div class="ctnr">
+      <div class="lv">
+        <img src="https://dekatutorial.github.io/crd/lv.svg" />
+        <p>Klik Love-nya</p>
+      </div>
+      <div class="ctn">
+        <button class="btn next">[ Lanjut ]</button>
+        <button class="btn send">[ Kirim Pesan ]</button>
+      </div>
+    </div>
+
+    <script>
+      var konten = [
+        {
+          gambar: "Stiker 50.gif",
+          ucapan: "Haii, Tuan Putreee.... ciee makin dewasa nih yeeee...",
+        },
+        {
+          gambar: "Stiker 49.gif",
+          ucapan: "heeheehe",
+        },
+        {
+          gambar: "Stiker 48.gif",
+          ucapan: "semoga ini tidak menganggu mu yaaa",
+        },
+        {
+          gambar: "Stiker 45.gif",
+          ucapan: "terimakasih udah mau bacaa",
+        },
+        {
+          gambar: "Stiker 44.gif",
+          ucapan: "mungkin ini alayy",
+        },
+        {
+          gambar: "Stiker 43.gif",
+          ucapan: "tapi, gak papa",
+        },
+        {
+          gambar: "Stiker 37.gif",
+          ucapan: "makin cantik yaa",
+        },
+        {
+          gambar: "Stiker 36.gif",
+          ucapan: "tambah keren juga, kan dah ada gelar",
+        },
+        {
+          gambar: "Stiker 4 kapan.gif",
+          ucapan: "BTW, Kapan Putt???",
+        },
+      ];
+
+      var musik = "musik.mp3";
+      var nomorWhatsapp = "6282372296364";
+    </script>
+    <footer class="bg-black text-white py-6 border-t-4 border-emerald-500 relative overflow-hidden mt-10">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-7xl mx-auto text-center relative z-10 px-4">
+            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest">
+                &copy; Created by Ibnu <i class="fa-solid fa-heart text-red-500"></i>
+            </p>
+        </div>
+    </footer>
+
+    <script> 
+        if(typeof konten !== 'undefined' && typeof musik !== 'undefined') {
+            DekaTutorial(konten, musik, nomorWhatsapp); 
+        }
+    </script>
+  </body>
+</html>
