@@ -1,89 +1,671 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order Custom di Deka Tutorial</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>
-    <script src="https://dekatutorial.github.io/crd/s.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://dekatutorial.github.io/crd/s.css" />
-
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kewirausahaan HMPS PPN D-IV - Manhwa Style</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  </head>
-  <body class="bg-gray-100"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Komik & Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
-    <script>dt()</script>
-    
-    <div class="ctnr">
-      <div class="lv">
-        <img src="https://dekatutorial.github.io/crd/lv.svg" />
-        <p>Klik Love-nya</p>
-      </div>
-      <div class="ctn">
-        <button class="btn next">[ Lanjut ]</button>
-        <button class="btn send">[ Kirim Pesan ]</button>
-      </div>
-    </div>
+    <style>
+        :root {
+            --primary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --border-width: 2px;
+            --shadow-offset: 4px;
+        }
 
-    <script>
-      var konten = [
-        {
-          gambar: "Stiker 50.gif",
-          ucapan: "Haii, Tuan Putreee.... ciee makin dewasa nih yeeee...",
-        },
-        {
-          gambar: "Stiker 49.gif",
-          ucapan: "heeheehe",
-        },
-        {
-          gambar: "Stiker 48.gif",
-          ucapan: "semoga ini tidak menganggu mu yaaa",
-        },
-        {
-          gambar: "Stiker 45.gif",
-          ucapan: "terimakasih udah mau bacaa",
-        },
-        {
-          gambar: "Stiker 44.gif",
-          ucapan: "mungkin ini alayy",
-        },
-        {
-          gambar: "Stiker 43.gif",
-          ucapan: "tapi, gak papa",
-        },
-        {
-          gambar: "Stiker 37.gif",
-          ucapan: "makin cantik yaa",
-        },
-        {
-          gambar: "Stiker 36.gif",
-          ucapan: "tambah keren juga, kan dah ada gelar",
-        },
-        {
-          gambar: "Stiker 4 kapan.gif",
-          ucapan: "BTW, Kapan Putt???",
-        },
-      ];
+        /* PERBAIKAN: Mencegah scroll ke samping (horizontal) */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
 
-      var musik = "musik.mp3";
-      var nomorWhatsapp = "6282372296364";
-    </script>
-    <footer class="bg-black text-white py-6 border-t-4 border-emerald-500 relative overflow-hidden mt-10">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f9ff;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--dark);
+        }
+
+        /* Manhwa/Comic Header Font */
+        h1, h2, h3, h4, .comic-font {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .title-effect {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        /* Panel Style */
+        .manhwa-panel {
+            background: white;
+            border: var(--border-width) solid black;
+            border-radius: 12px;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px rgba(0,0,0,1);
+            transition: all 0.2s ease;
+        }
+
+        /* Disable hover movement on mobile to prevent sticky glitches */
+        @media (min-width: 768px) {
+            .manhwa-panel:hover {
+                transform: translate(-2px, -2px);
+                box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0px 0px rgba(0,0,0,1);
+            }
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        /* Buttons */
+        .btn-comic {
+            border: var(--border-width) solid black;
+            box-shadow: 3px 3px 0px 0px black;
+            transition: all 0.1s ease;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .btn-comic:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px 0px black;
+        }
+
+        /* Speech Bubble */
+        .speech-bubble {
+            position: relative;
+            background: white;
+            border: 2px solid black;
+            border-radius: 12px;
+            max-width: 90%; 
+        }
+        .speech-bubble::after {
+            content: ''; position: absolute; bottom: -10px; left: 20px;
+            border-width: 10px 10px 0; border-style: solid; border-color: black transparent;
+            display: block; width: 0;
+        }
+        .speech-bubble::before {
+            content: ''; position: absolute; bottom: -6px; left: 22px;
+            border-width: 8px 8px 0; border-style: solid; border-color: white transparent;
+            display: block; width: 0; z-index: 1;
+        }
+
+        /* Navigation */
+        .nav-comic {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 3px solid black;
+        }
+
+        /* Container gambar agar responsif */
+        .comic-img-container {
+            border-bottom: 2px solid black;
+            overflow: hidden;
+        }
+
+        .comic-badge {
+            border: 1px solid black;
+            box-shadow: 2px 2px 0px black;
+        }
+
+        .divider-zigzag {
+            height: 20px;
+            background: linear-gradient(135deg, black 25%, transparent 25%) -10px 0,
+                        linear-gradient(225deg, black 25%, transparent 25%) -10px 0,
+                        linear-gradient(315deg, black 25%, transparent 25%),
+                        linear-gradient(45deg, black 25%, transparent 25%);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            margin: 20px 0;
+        }
+
+        /* Modal Styles */
+        #detail-modal {
+            transition: opacity 0.3s ease;
+        }
+        #detail-modal.hidden {
+            pointer-events: none;
+            opacity: 0;
+        }
+        #detail-modal:not(.hidden) {
+            pointer-events: auto;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 nav-comic backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center transition-all duration-300"> 
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-black focus:outline-none p-2 rounded hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-bars text-3xl"></i> 
+                    </button>
+                </div>
+
+                <div class="hidden md:flex space-x-8 font-bold text-sm items-center tracking-wide">
+                    <a href="#home" class="text-black hover:text-emerald-600 hover:underline decoration-2 underline-offset-4 transition">BERANDA</a>
+                    <a href="#merchandise" class="text-black hover:text-emerald-600 hover:underline decoration-2 underline-offset-4 transition">MERCHANDISE</a>
+                    <a href="#showcase" class="text-black hover:text-emerald-600 hover:underline decoration-2 underline-offset-4 transition">SHOWCASE</a>
+                    <a href="#edukasi" class="text-black hover:text-emerald-600 hover:underline decoration-2 underline-offset-4 transition">EDUKASI</a>
+
+                    <!-- TOMBOL SURVEY BARU (DESKTOP) -->
+                    <a href="https://forms.gle/6MnP3LyJvzYZmcXp7" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline decoration-2 underline-offset-4 transition flex items-center gap-1">
+                        <i class="fa-solid fa-clipboard-list"></i> SURVEY
+                    </a>    
+                    <a href="https://wa.me/62372296364" class="btn-comic bg-emerald-400 text-black px-6 py-3 rounded-lg hover:bg-emerald-300">
+                        ORDER SEKARANG!
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-2 transform hover:scale-105 transition duration-200 cursor-pointer">
+                    <div class="flex flex-col items-end">
+                        <span class="font-black text-lg md:text-xl leading-none tracking-tight text-black italic text-right">HMPS PPN DIV</span>
+                        <span class="text-emerald-600 text-[10px] md:text-xs font-bold uppercase tracking-widest bg-yellow-300 px-1 border border-black inline-block mt-1">
+                            Aktif-Maju-Berkarya
+                        </span>
+                    </div>
+                    <img src="PPN.png" alt="Logo HMPS" class="w-16 h-16 object-contain">
+                </div>
+
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden bg-white border-t-2 border-black">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block px-4 py-3 font-bold border-2 border-black rounded-lg hover:bg-emerald-50 active:bg-emerald-100" onclick="toggleMenu()">🏠 BERANDA</a>
+                <a href="#merchandise" class="block px-4 py-3 font-bold border-2 border-black rounded-lg hover:bg-emerald-50 active:bg-emerald-100" onclick="toggleMenu()">👕 MERCHANDISE</a>
+                <a href="#showcase" class="block px-4 py-3 font-bold border-2 border-black rounded-lg hover:bg-emerald-50 active:bg-emerald-100" onclick="toggleMenu()">🛍️ SHOWCASE</a>
+                <a href="#edukasi" class="block px-4 py-3 font-bold border-2 border-black rounded-lg hover:bg-emerald-50 active:bg-emerald-100" onclick="toggleMenu()">📈 EDUKASI</a>
+                <a href="https://wa.me/628123456789" class="block px-4 py-3 text-center bg-emerald-400 text-black font-black border-2 border-black rounded-lg shadow-[3px_3px_0px_0px_black] active:shadow-none active:translate-y-1" onclick="toggleMenu()">
+                    ORDER SEKARANG!
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Beranda) -->
+    <header id="home" class="relative pt-12 pb-20 md:pt-24 md:pb-32 px-4 overflow-hidden">
+        
+        <div class="absolute top-20 right-0 w-64 h-64 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse border-4 border-black hidden md:block"></div>
+        <div class="absolute bottom-20 left-10 w-48 h-48 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 border-4 border-black hidden md:block"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-block bg-black text-white px-3 py-1 md:px-4 rounded-full font-bold text-xs md:text-sm mb-4 md:mb-6 border-2 border-white shadow-lg rotate-2">
+                OFFICIAL WEBSITE V.1.0
+            </div>
+
+            <h1 class="text-4xl md:text-7xl font-black mb-4 md:mb-6 leading-tight text-black drop-shadow-sm title-effect italic">
+                DIVISI KWU<br>HMPS PPN D-IV!
+            </h1>
+            
+            <div class="speech-bubble inline-block p-4 md:p-6 max-w-2xl mx-auto mb-8 md:mb-10 transform -rotate-1 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
+                <p class="text-base md:text-xl font-bold text-gray-800">
+                    "Platform resmi pemesanan merchandise dan ruang kreatif ekonomi mahasiswa. Dari Kita, Untuk Kita!"
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12 text-left md:text-center mt-4">
+                <div class="manhwa-panel p-4 flex items-center md:flex-col gap-4 bg-white">
+                    <div class="bg-blue-100 w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-black flex items-center justify-center md:mx-auto text-black shrink-0 shadow-[2px_2px_0px_black]">
+                        <i class="fa-solid fa-book-open text-lg md:text-xl"></i>
+                    </div>
+                    <span class="font-bold text-base md:text-lg">Akses Katalog Lengkap</span>
+                </div>
+                <div class="manhwa-panel p-4 flex items-center md:flex-col gap-4 bg-yellow-50 transform md:-translate-y-4">
+                    <div class="bg-yellow-200 w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-black flex items-center justify-center md:mx-auto text-black shrink-0 shadow-[2px_2px_0px_black]">
+                        <i class="fa-solid fa-cart-shopping text-lg md:text-xl"></i>
+                    </div>
+                    <span class="font-bold text-base md:text-lg">Order Lebih Mudah</span>
+                </div>
+                <div class="manhwa-panel p-4 flex items-center md:flex-col gap-4 bg-white">
+                    <div class="bg-purple-100 w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-black flex items-center justify-center md:mx-auto text-black shrink-0 shadow-[2px_2px_0px_black]">
+                        <i class="fa-solid fa-hand-holding-dollar text-lg md:text-xl"></i>
+                    </div>
+                    <span class="font-bold text-base md:text-lg">Transparansi Dana</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center gap-4 md:gap-6">
+                <p class="font-black text-lg md:text-xl animate-bounce bg-white px-4 py-1 border-2 border-black rounded shadow-[2px_2px_0px_black]">
+                    👇 KLIK DI BAWAH 👇
+                </p>
+                <a href="#merchandise" class="btn-comic bg-black text-white px-8 py-4 md:px-12 md:py-5 rounded-xl text-lg md:text-xl hover:bg-gray-900 w-full md:w-auto text-center transform hover:-rotate-1">
+                    MULAI ORDER SEKARANG <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="divider-zigzag"></div>
+
+    <!-- Merchandise Section -->
+    <section id="merchandise" class="py-16 max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-center mb-12 relative">
+            <h2 class="text-4xl font-black text-center bg-white border-2 border-black px-8 py-3 rounded-lg shadow-[4px_4px_0px_black] rotate-1 z-10">
+                MERCHANDISE RESMI <i class="fa-solid fa-shirt text-emerald-500 ml-2"></i>
+            </h2>
+            <div class="absolute w-full h-1 bg-black top-1/2 left-0 -z-0"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Baju Angkatan -->
+            <div class="manhwa-panel product-card overflow-hidden flex flex-col group">
+                <div class="h-60 bg-gray-200 relative comic-img-container">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=600" alt="Baju Angkatan" class="w-full h-full object-cover product-img transition duration-500">
+                    <span class="comic-badge absolute top-3 right-3 bg-yellow-400 text-black text-xs font-black px-3 py-1 rounded uppercase rotate-3">HOT ITEM!</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col bg-white">
+                    <h3 class="font-black text-xl mb-2 uppercase">Baju Angkatan</h3>
+                    <p class="text-gray-600 text-sm font-medium mb-4 flex-1 border-l-4 border-gray-300 pl-3">Representasi identitas. Tersedia untuk semua angkatan aktif!</p>
+                    <button onclick="openModal('angkatan')" class="btn-comic w-full py-2 rounded bg-white hover:bg-gray-50 text-sm">Lihat Detail</button>
+                </div>
+            </div>
+
+            <!-- Baju Korsa -->
+            <div class="manhwa-panel product-card overflow-hidden flex flex-col group">
+                <div class="h-60 bg-gray-200 comic-img-container">
+                    <img src="korsa himpunan.jpg" alt="Baju Korsa" class="w-full h-full object-cover product-img transition duration-500">
+                </div>
+                <div class="p-6 flex-1 flex flex-col bg-white">
+                    <h3 class="font-black text-xl mb-2 uppercase">Korsa HMPS</h3>
+                    <p class="text-gray-600 text-sm font-medium mb-4 flex-1 border-l-4 border-gray-300 pl-3">Kebanggaan Himpunan Pengelolaan Perkebunan!</p>
+                    <button onclick="openModal('korsa')" class="btn-comic w-full py-2 rounded bg-white hover:bg-gray-50 text-sm">Lihat Detail</button>
+                </div>
+            </div>
+
+            <!-- Jersey -->
+            <div class="manhwa-panel product-card overflow-hidden flex flex-col group">
+                <div class="h-60 bg-gray-200 comic-img-container">
+                    <img src="jersey.jpg" alt="Jersey" class="w-full h-full object-cover product-img transition duration-500">
+                    <span class="comic-badge absolute top-3 right-3 bg-red-400 text-white text-xs font-black px-3 py-1 rounded uppercase -rotate-2">LIMITED</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col bg-white">
+                    <h3 class="font-black text-xl mb-2 uppercase">Sporty Jersey</h3>
+                    <p class="text-gray-600 text-sm font-medium mb-4 flex-1 border-l-4 border-gray-300 pl-3">Eksklusif! Diproduksi pada Batch PO resmi.</p>
+                    <button onclick="openModal('jersey')" class="btn-comic w-full py-2 rounded bg-white hover:bg-gray-50 text-sm">Lihat Detail</button>
+                </div>
+            </div>
+
+            <!-- Jas Lab -->
+            <div class="manhwa-panel product-card overflow-hidden flex flex-col group">
+                <div class="h-60 bg-gray-200 comic-img-container">
+                    <img src="jas lab.jpg" alt="Jas Lab" class="w-full h-full object-cover product-img transition duration-500">
+                </div>
+                <div class="p-6 flex-1 flex flex-col bg-white">
+                    <h3 class="font-black text-xl mb-2 uppercase">Jas Lab</h3>
+                    <p class="text-gray-600 text-sm font-medium mb-4 flex-1 border-l-4 border-gray-300 pl-3">Pelengkap wajib praktikum sesuai standar prodi.</p>
+                    <button onclick="openModal('jaslab')" class="btn-comic w-full py-2 rounded bg-white hover:bg-gray-50 text-sm">Lihat Detail</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fasilitas Info Box -->
+        <div class="mt-16 bg-emerald-50 p-8 rounded-xl border-2 border-black shadow-[6px_6px_0px_black] relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 text-9xl opacity-10 rotate-12">
+                <i class="fa-solid fa-check-double"></i>
+            </div>
+            <h4 class="text-2xl font-black mb-6 flex items-center gap-3">
+                <span class="bg-black text-white px-3 py-1 rounded transform -rotate-2">INFO</span> 
+                FASILITAS PEMESANAN
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                <div class="flex items-center gap-3 bg-white p-4 rounded-lg border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,0.1)]">
+                    <div class="w-8 h-8 bg-black text-white rounded flex items-center justify-center font-bold">1</div>
+                    <p class="text-sm font-bold">Preview Desain & Size Chart</p>
+                </div>
+                <div class="flex items-center gap-3 bg-white p-4 rounded-lg border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,0.1)]">
+                    <div class="w-8 h-8 bg-black text-white rounded flex items-center justify-center font-bold">2</div>
+                    <p class="text-sm font-bold">Form Order Online Mudah</p>
+                </div>
+                <div class="flex items-center gap-3 bg-white p-4 rounded-lg border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,0.1)]">
+                    <div class="w-8 h-8 bg-black text-white rounded flex items-center justify-center font-bold">3</div>
+                    <p class="text-sm font-bold">Update Progress Produksi</p>
+                </div>
+                <div class="flex items-center gap-3 bg-white p-4 rounded-lg border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,0.1)]">
+                    <div class="w-8 h-8 bg-black text-white rounded flex items-center justify-center font-bold">4</div>
+                    <p class="text-sm font-bold">Kontak PIC Yang Jelas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section id="showcase" class="py-20 bg-white border-t-2 border-b-2 border-black relative pattern-bg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <div class="inline-block bg-yellow-300 border-2 border-black px-4 py-2 font-black text-xl shadow-[4px_4px_0px_black] transform -rotate-2 mb-6">
+                        🛍️ SHOWCASE AREA
+                    </div>
+                    <h2 class="text-4xl font-black mb-6 leading-tight">
+                        PRODUK KREATIF<br>ANGGOTA & ALUMNI
+                    </h2>
+                    <p class="text-lg font-medium mb-8 border-l-4 border-emerald-500 pl-4 bg-emerald-50 py-2">
+                        Ruang untuk mendukung dan menampilkan berbagai karya serta usaha anggota HMPS PPN D-IV.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-white p-3 border-2 border-black rounded flex items-center gap-3 shadow-[2px_2px_0px_black] hover:translate-x-1 hover:shadow-none transition cursor-default">
+                            <i class="fa-solid fa-shirt text-emerald-600 text-xl"></i>
+                            <span class="font-bold">Fashion & Apparel</span>
+                        </div>
+                        <div class="bg-white p-3 border-2 border-black rounded flex items-center gap-3 shadow-[2px_2px_0px_black] hover:translate-x-1 hover:shadow-none transition cursor-default">
+                            <i class="fa-solid fa-utensils text-emerald-600 text-xl"></i>
+                            <span class="font-bold">Makanan & Minuman</span>
+                        </div>
+                        <div class="bg-white p-3 border-2 border-black rounded flex items-center gap-3 shadow-[2px_2px_0px_black] hover:translate-x-1 hover:shadow-none transition cursor-default">
+                            <i class="fa-solid fa-gifts text-emerald-600 text-xl"></i>
+                            <span class="font-bold">Merchandise</span>
+                        </div>
+                        <div class="bg-white p-3 border-2 border-black rounded flex items-center gap-3 shadow-[2px_2px_0px_black] hover:translate-x-1 hover:shadow-none transition cursor-default">
+                            <i class="fa-solid fa-hand-sparkles text-emerald-600 text-xl"></i>
+                            <span class="font-bold">Jasa & Layanan</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-black text-white p-8 rounded-xl shadow-[8px_8px_0px_gray] relative">
+                        <div class="absolute -top-3 -right-3 bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold border-2 border-white animate-bounce">!</div>
+                        <h4 class="text-xl font-black mb-2 text-yellow-300">PUNYA PRODUK?</h4>
+                        <p class="mb-6 font-medium">Yuk daftarkan produkmu untuk tampil di sini!</p>
+                        <a href="#" class="inline-flex justify-center items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-black border-2 border-white hover:bg-emerald-400 hover:border-black transition">
+                            <i class="fa-solid fa-file-pen"></i> ISI FORMULIR
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2">
+                    <div class="relative p-4 border-2 border-black bg-emerald-100 rounded-xl shadow-[8px_8px_0px_black]">
+                        <!-- Frame decorations -->
+                        <div class="absolute top-2 left-2 w-3 h-3 bg-black rounded-full"></div>
+                        <div class="absolute top-2 right-2 w-3 h-3 bg-black rounded-full"></div>
+                        
+                        <!-- SHOWCASE UTAMA (Miguna Merch) -->
+                        <div class="bg-white p-4 border-2 border-black rounded-lg">
+                            <img src="meguni mas lukman.jpg" alt="Miguna Merch - Ahmad Lukmanto" class="rounded border-2 border-black object-cover w-full h-64 hover:scale-105 transition">
+                            
+                            <div class="mt-4 bg-yellow-50 border-2 border-black p-4 rounded text-left relative">
+                                <!-- Badge -->
+                                <span class="absolute -top-3 right-4 bg-red-500 text-white text-xs font-black px-2 py-1 border border-black transform rotate-2">
+                                    ALUMNI SPOTLIGHT
+                                </span>
+
+                                <h3 class="font-black text-xl mb-1">MIGUNA MERCH</h3>
+                                <p class="text-xs font-bold text-gray-500 mb-2">Oleh: Ahmad Lukmanto (Alumni PPN 20 - Ex. KA)</p>
+                                
+                                <p class="text-sm font-medium leading-relaxed text-gray-800">
+                                    "Brand ini lahir dari keprihatinan Mas Lukman akan sedikitnya merchandise yang menjadi identitas kampus kita. Miguna Merch hadir sebagai solusi dan kebanggaan."
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edukasi Emiten -->
+    <section id="edukasi" class="py-20 max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black inline-block bg-white px-6 py-2 border-2 border-black shadow-[4px_4px_0px_black] transform rotate-1">
+                <i class="fa-solid fa-chart-line text-emerald-600"></i> Planter's Stock
+            </h2>
+            <p class="font-bold mt-6 max-w-2xl mx-auto bg-emerald-100 p-2 rounded border border-black inline-block">
+                Edukasi bisnis dan industri perkebunan untuk mahasiswa.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <!-- Card Emiten Style -->
+            <div class="manhwa-panel p-5 group hover:bg-emerald-50 cursor-pointer">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="w-12 h-12 bg-black text-white rounded-lg border-2 border-black flex items-center justify-center font-black text-xl group-hover:bg-emerald-500 transition">S</div>
+                    <span class="font-black text-xs bg-yellow-300 border border-black px-2 py-1 rounded">SMAR</span>
+                </div>
+                <h3 class="font-black text-lg mb-1">SMART Tbk</h3>
+                <p class="text-sm font-medium leading-tight">Perusahaan konsumen berbasis kelapa sawit terintegrasi.</p>
+            </div>
+
+            <div class="manhwa-panel p-5 group hover:bg-emerald-50 cursor-pointer">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="w-12 h-12 bg-black text-white rounded-lg border-2 border-black flex items-center justify-center font-black text-xl group-hover:bg-emerald-500 transition">J</div>
+                    <span class="font-black text-xs bg-yellow-300 border border-black px-2 py-1 rounded">JARR</span>
+                </div>
+                <h3 class="font-black text-lg mb-1">Jaya Agra Wattie</h3>
+                <p class="text-sm font-medium leading-tight">Pengelolaan perkebunan karet, sawit, kopi, dan teh.</p>
+            </div>
+
+            <div class="manhwa-panel p-5 group hover:bg-emerald-50 cursor-pointer">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="w-12 h-12 bg-black text-white rounded-lg border-2 border-black flex items-center justify-center font-black text-xl group-hover:bg-emerald-500 transition">P</div>
+                    <span class="font-black text-xs bg-yellow-300 border border-black px-2 py-1 rounded">PTPN</span>
+                </div>
+                <h3 class="font-black text-lg mb-1">PTPN Holding</h3>
+                <p class="text-sm font-medium leading-tight">BUMN perkebunan raksasa dari hulu hingga hilir.</p>
+            </div>
+
+            <div class="manhwa-panel p-5 group hover:bg-emerald-50 cursor-pointer">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="w-12 h-12 bg-black text-white rounded-lg border-2 border-black flex items-center justify-center font-black text-xl group-hover:bg-emerald-500 transition">B</div>
+                    <span class="font-black text-xs bg-yellow-300 border border-black px-2 py-1 rounded">BWPT</span>
+                </div>
+                <h3 class="font-black text-lg mb-1">Eagle High</h3>
+                <p class="text-sm font-medium leading-tight">Perkebunan sawit luas di Kalimantan dan Papua.</p>
+            </div>
+
+            <div class="manhwa-panel p-5 group hover:bg-emerald-50 cursor-pointer">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="w-12 h-12 bg-black text-white rounded-lg border-2 border-black flex items-center justify-center font-black text-xl group-hover:bg-emerald-500 transition">W</div>
+                    <span class="font-black text-xs bg-yellow-300 border border-black px-2 py-1 rounded">Wilmar</span>
+                </div>
+                <h3 class="font-black text-lg mb-1">Wilmar Intl</h3>
+                <p class="text-sm font-medium leading-tight">Pemimpin global dalam sektor agribisnis.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER SURVEY BARU -->
+    <section class="bg-blue-600 py-12 border-t-4 border-black text-white text-center relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: radial-gradient(white 2px, transparent 2px); background-size: 30px 30px;"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-5xl font-black mb-4 title-effect transform -rotate-1">
+                SUARA ANDA SANGAT BERARTI! 📢
+            </h2>
+            <p class="text-lg md:text-xl font-medium mb-8 max-w-2xl mx-auto">
+                Bantu kami meningkatkan kualitas layanan dan produk dengan mengisi survey kepuasan singkat ini.
+            </p>
+            <a href="https://forms.gle/6MnP3LyJvzYZmcXp7" target="_blank" class="inline-block bg-yellow-400 text-black text-xl font-black px-8 py-4 rounded-xl border-2 border-black shadow-[4px_4px_0px_black] hover:translate-x-1 hover:shadow-none transition transform hover:rotate-1">
+                📝 ISI SURVEY SEKARANG
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4 border-t-4 border-emerald-500 relative overflow-hidden">
+        <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;"></div>
         
-        <div class="max-w-7xl mx-auto text-center relative z-10 px-4">
-            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest">
-                &copy; Created by Ibnu <i class="fa-solid fa-heart text-red-500"></i>
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            <div>
+                <div class="flex items-center gap-3 mb-6 bg-white p-3 rounded border-2 border-emerald-500 inline-flex shadow-[4px_4px_0px_#10b981]">
+                    <i class="fa-solid fa-leaf text-black text-2xl"></i>
+                    <h4 class="text-xl font-black text-black">HMPS PPN D-IV</h4>
+                </div>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed font-medium">
+                    Himpunan Mahasiswa Program Studi Pengelolaan Perkebunan DIV. Menginspirasi dan membangun kemandirian ekonomi mahasiswa.
+                </p>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/hmps.ppnd4_official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="w-12 h-12 rounded bg-white border-2 border-emerald-500 flex items-center justify-center text-black hover:bg-emerald-500 hover:text-white transition shadow-[2px_2px_0px_white] hover:shadow-none hover:translate-x-1"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="https://www.tiktok.com/@hmps.ppnd4_official?is_from_webapp=1&sender_device=pc" target="_blank" class="w-12 h-12 rounded bg-white border-2 border-emerald-500 flex items-center justify-center text-black hover:bg-emerald-500 hover:text-white transition shadow-[2px_2px_0px_white] hover:shadow-none hover:translate-x-1"><i class="fa-brands fa-tiktok text-xl"></i></a>
+                    <a href="https://youtube.com/@hmpsbtpdiv9187?si=t-WNittZmCw1lJ4t" target="_blank" class="w-12 h-12 rounded bg-white border-2 border-emerald-500 flex items-center justify-center text-black hover:bg-emerald-500 hover:text-white transition shadow-[2px_2px_0px_white] hover:shadow-none hover:translate-x-1"><i class="fa-brands fa-youtube text-xl"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-xl font-black mb-6 text-emerald-400 uppercase tracking-wider">Navigasi Cepat</h4>
+                <ul class="space-y-3 text-gray-300 font-bold">
+                    <li><a href="#home" class="hover:text-emerald-400 transition flex items-center gap-2 hover:translate-x-2"><i class="fa-solid fa-angle-right"></i> Beranda</a></li>
+                    <li><a href="#merchandise" class="hover:text-emerald-400 transition flex items-center gap-2 hover:translate-x-2"><i class="fa-solid fa-angle-right"></i> Merchandise</a></li>
+                    <li><a href="#showcase" class="hover:text-emerald-400 transition flex items-center gap-2 hover:translate-x-2"><i class="fa-solid fa-angle-right"></i> Showcase</a></li>
+                    <li><a href="#edukasi" class="hover:text-emerald-400 transition flex items-center gap-2 hover:translate-x-2"><i class="fa-solid fa-angle-right"></i> Edukasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-black mb-6 text-emerald-400 uppercase tracking-wider">Hubungi Kami</h4>
+                <div class="bg-gray-900 p-6 border-2 border-gray-700 rounded-lg">
+                    <div class="flex items-start gap-3 text-gray-300 text-sm mb-4">
+                        <i class="fa-solid fa-location-dot mt-1 text-emerald-500"></i>
+                        <p class="font-bold">Politeknik LPP Yogyakarta,<br>Kampus Utama</p>
+                    </div>
+                    <a href="https://wa.me/628123456789" class="btn-comic bg-emerald-500 text-black px-6 py-3 rounded-lg text-sm font-black flex items-center justify-center gap-2 hover:bg-white w-full">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> CHAT PIC SEKARANG
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 text-center border-t border-gray-800">
+            <p class="text-gray-500 text-xs font-bold uppercase tracking-widest">
+                &copy; 2025 Divisi Kewirausahaan HMPS PPN D-IV. Created by Ibnu <i class="fa-solid fa-heart text-red-500"></i>
             </p>
         </div>
     </footer>
 
-    <script> 
-        if(typeof konten !== 'undefined' && typeof musik !== 'undefined') {
-            DekaTutorial(konten, musik, nomorWhatsapp); 
+    <!-- MODAL DETAIL -->
+    <div id="detail-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <div class="relative bg-white w-full max-w-lg rounded-2xl border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] p-6 md:p-8 transform scale-95 transition-transform duration-300" id="modal-content">
+            <button onclick="closeModal()" class="absolute -top-4 -right-4 w-10 h-10 bg-red-500 text-white border-2 border-black rounded-full font-bold shadow-[2px_2px_0px_black] hover:scale-110 transition z-10 flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center">
+                <div class="inline-block bg-yellow-300 border-2 border-black px-4 py-1 rounded font-black text-sm mb-4 transform -rotate-2" id="modal-tag">
+                    DETAIL PRODUK
+                </div>
+                <h3 id="modal-title" class="text-3xl font-black mb-2 uppercase italic">JUDUL PRODUK</h3>
+                <div class="h-1 w-20 bg-black mx-auto mb-6 rounded-full"></div>
+                
+                <div class="text-left bg-gray-50 p-4 rounded-xl border-2 border-gray-200 mb-6">
+                    <p id="modal-desc" class="text-gray-700 font-medium leading-relaxed mb-4">
+                        Deskripsi singkat produk akan muncul di sini.
+                    </p>
+                    <ul id="modal-features" class="space-y-2 text-sm font-bold text-gray-600">
+                        <!-- List fitur akan di-inject lewat JS -->
+                    </ul>
+                </div>
+
+                <a href="https://wa.me/628123456789" class="btn-comic w-full py-3 rounded-xl bg-emerald-500 text-white hover:bg-emerald-600 flex items-center justify-center gap-2 text-lg">
+                    <i class="fa-brands fa-whatsapp"></i> PESAN SEKARANG
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Script & Modal Logic -->
+    <script>
+        // Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        function toggleMenu() {
+            if (window.innerWidth < 768) {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Data Produk
+        const products = {
+            'angkatan': {
+                title: '👕 Baju Angkatan',
+                tag: 'IDENTITAS ANGKATAN',
+                desc: 'Identitas resmi setiap angkatan PPN. Dirancang dengan desain unik dan berbeda tiap tahun sebagai ciri khas angkatan.',
+                features: [
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Tersedia untuk seluruh angkatan aktif',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Desain eksklusif per angkatan',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Nyaman digunakan untuk kegiatan kampus dan non-kampus'
+                ]
+            },
+            'korsa': {
+                title: '🟢 Baju Korsa HMPS PPN D-IV',
+                tag: 'OFFICIAL IDENTITY',
+                desc: 'Baju identitas resmi anggota HMPS PPN D-IV. Bersifat eksklusif dan terbatas.',
+                features: [
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Hanya untuk anggota aktif HMPS',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Dapat dimiliki setelah mengikuti Makrab, Oprec, LKMTD, dan Diklat',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Simbol komitmen, loyalitas, dan kebanggaan himpunan'
+                ]
+            },
+            'jersey': {
+                title: '🏅 Jersey HMPS PPN D-IV',
+                tag: 'SPORTY & ACTIVE',
+                desc: 'Jersey resmi HMPS dengan desain sporty dan modern. Diproduksi melalui Batch Open PO resmi.',
+                features: [
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Bahan premium, ringan, dan nyaman',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Cocok untuk voli, futsal, badminton, hingga e-sport',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Mendukung kekompakan dan semangat sportivitas'
+                ]
+            },
+            'jaslab': {
+                title: '🧪 Jas Laboratorium',
+                tag: 'WAJIB PRAKTIKUM',
+                desc: 'Perlengkapan wajib mahasiswa PPN dalam kegiatan praktikum. Diproduksi sesuai standar program studi.',
+                features: [
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Nyaman dan aman digunakan',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Model rapi dan profesional',
+                    '<i class="fa-solid fa-check text-emerald-500 mr-2"></i>✔ Cocok untuk seluruh kegiatan laboratorium'
+                ]
+            }
+        };
+
+        // Modal Logic
+        const modal = document.getElementById('detail-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal(productId) {
+            const data = products[productId];
+            if(!data) return;
+
+            // Isi konten modal
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-tag').innerText = data.tag;
+            document.getElementById('modal-desc').innerText = data.desc;
+            
+            // Render features list
+            const featuresList = document.getElementById('modal-features');
+            featuresList.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+
+            // Tampilkan modal
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
         }
     </script>
-  </body>
+</body>
 </html>
